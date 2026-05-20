@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ignacio Toro Carvajal · Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== Reset & Base ===== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a28;
+      --bg-card-hover: #22223a;
+      --text-primary: #e8e8f0;
+      --text-secondary: #9898b0;
+      --text-muted: #6a6a82;
+      --accent: #6c5ce7;
+      --accent-light: #8b7df0;
+      --accent-glow: rgba(108, 92, 231, 0.25);
+      --green: #00d68f;
+      --orange: #ff9f43;
+      --border: #2a2a3e;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 20px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--bg-secondary);
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== Ambient Background ===== */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ===== Layout ===== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 28px;
+    }
+    .section-label::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 1.5px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+      color: var(--text-primary);
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero-greeting {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-light);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-greeting .line {
+      display: inline-block;
+      width: 32px;
+      height: 1.5px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-role {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    .hero-role strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .hero-summary {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .hero-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      margin-bottom: 40px;
+    }
+    .hero-contact a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.25s;
+      position: relative;
+    }
+    .hero-contact a:hover {
+      color: var(--accent-light);
+    }
+    .hero-contact a svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 4px 24px var(--accent-glow);
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+
+    /* ===== Experience ===== */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 48px;
+      padding: 24px 28px;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    .timeline-item:hover {
+      background: var(--bg-card-hover);
+      transform: translateX(4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -28px;
+      top: 30px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg-primary);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .timeline-dot.current {
+      background: var(--green);
+      box-shadow: 0 0 0 2px var(--green), 0 0 20px rgba(0, 214, 143, 0.3);
+    }
+
+    .timeline-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .timeline-company {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .timeline-company a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .timeline-company a:hover {
+      color: var(--accent-light);
+    }
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .timeline-role {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--accent-light);
+      margin-bottom: 12px;
+    }
+    .timeline-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .timeline-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      background: rgba(108, 92, 231, 0.12);
+      color: var(--accent-light);
+      border-radius: 20px;
+      border: 1px solid rgba(108, 92, 231, 0.2);
+    }
+
+    /* ===== Skills ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-category {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .skill-category:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .skill-category-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-light);
+      margin-bottom: 16px;
+      font-family: var(--font-mono);
+    }
+
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: all 0.25s;
+      cursor: default;
+    }
+    .skill-item:hover {
+      background: rgba(108, 92, 231, 0.15);
+      border-color: rgba(108, 92, 231, 0.3);
+      color: var(--text-primary);
+      transform: scale(1.04);
+    }
+    .skill-item .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .skill-item .dot.mastery-high {
+      background: var(--green);
+    }
+    .skill-item .dot.mastery-mid {
+      background: var(--orange);
+    }
+
+    /* ===== Education ===== */
+    .education-list {
+      display: grid;
+      gap: 20px;
+    }
+    .education-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .education-item:hover {
+      background: var(--bg-card-hover);
+      transform: translateX(4px);
+    }
+    .education-degree {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .education-school {
+      color: var(--accent-light);
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+    }
+    .education-detail {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* ===== References ===== */
+    .references-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .reference-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .reference-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+    .reference-name {
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .reference-role {
+      font-size: 0.85rem;
+      color: var(--accent-light);
+      margin-bottom: 4px;
+    }
+    .reference-org {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      padding: 40px 0 32px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    footer p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    footer a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== Reveal Animation ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      section {
+        padding: 56px 0;
+      }
+      .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 28px;
+      }
+      .hero {
+        padding: 100px 0 60px;
+        min-height: auto;
+      }
+      .hero-contact {
+        gap: 10px 16px;
+      }
+      .timeline {
+        padding-left: 24px;
+      }
+      .timeline-item {
+        padding: 18px 20px;
+      }
+      .timeline-dot {
+        left: -22px;
+        width: 12px;
+        height: 12px;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .references-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+      .hero-name {
+        font-size: 2rem;
+      }
+      .hero-role {
+        font-size: 1rem;
+      }
+      .hero-cta {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Background Canvas ===== -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-greeting">
+          <span class="line"></span>
+          Hola, soy
+        </div>
+        <h1 class="hero-name">Ignacio Toro Carvajal</h1>
+        <p class="hero-role"><strong>Software Engineer</strong> · Full-Stack Developer · Systems Analyst</p>
+        <p class="hero-summary">
+          Ingeniero en Informática con experiencia en el ciclo completo de proyectos de software 
+          en los sectores de <strong>salud</strong>, <strong>educación</strong> y <strong>finanzas</strong>. 
+          Apasionado por el desarrollo de sistemas, análisis e implementación con foco en 
+          trabajo en equipo y mejora continua.
+        </p>
+        <div class="hero-contact">
+          <a href="tel:+56995997838">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +56 9 9599 7838
+          </a>
+          <a href="mailto:ignacio.toro.carvajal@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            ignacio.toro.carvajal@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/ignacio-toro-carvajal/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+        <a href="#experience" class="hero-cta">
+          Explorar trayectoria
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Experience ===== -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label reveal">Trayectoria</div>
+      <h2 class="section-title reveal">Experiencia Profesional</h2>
+      <div class="timeline">
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot current"></div>
+          <div class="timeline-header">
+            <span class="timeline-company">Universidad Adolfo Ibáñez</span>
+            <span class="timeline-date">2021 — Presente</span>
+          </div>
+          <div class="timeline-role">Development Engineer</div>
+          <div class="timeline-desc">
+            Ingeniero de desarrollo a cargo de los sistemas académicos institucionales, 
+            asegurando la continuidad operativa y la evolución tecnológica de las plataformas 
+            que soportan la gestión académica de la universidad.
+          </div>
+          <div class="timeline-tags">
+            <span class="timeline-tag">C#</span>
+            <span class="timeline-tag">MVC</span>
+            <span class="timeline-tag">Entity Framework</span>
+            <span class="timeline-tag">SqlServer</span>
+            <span class="timeline-tag">jQuery</span>
+            <span class="timeline-tag">.NET Core 5</span>
+            <span class="timeline-tag">Azure</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <span class="timeline-company">Administradora de Fondos de Cesantía (AFC)</span>
+            <span class="timeline-date">Mar 2020 — Jun 2020</span>
+          </div>
+          <div class="timeline-role">Developer Engineer</div>
+          <div class="timeline-desc">
+            Ingeniero de desarrollo enfocado en el soporte del core del sistema de la 
+            administradora de fondos de cesantía. Participé en la migración de frameworks 
+            y en la generación de reportes financieros críticos.
+          </div>
+          <div class="timeline-tags">
+            <span class="timeline-tag">C#</span>
+            <span class="timeline-tag">MVC</span>
+            <span class="timeline-tag">WebForm</span>
+            <span class="timeline-tag">ASP</span>
+            <span class="timeline-tag">SqlServer</span>
+            <span class="timeline-tag">jQuery</span>
+            <span class="timeline-tag">ETL</span>
+            <span class="timeline-tag">CSV</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <span class="timeline-company">Navimag</span>
+            <span class="timeline-date">2019</span>
+          </div>
+          <div class="timeline-role">Freelance Software Developer</div>
+          <div class="timeline-desc">
+            Desarrollo freelance de una intranet corporativa para la naviera, modernizando 
+            sus procesos internos con una plataforma web integral.
+          </div>
+          <div class="timeline-tags">
+            <span class="timeline-tag">ASP</span>
+            <span class="timeline-tag">SqlServer</span>
+            <span class="timeline-tag">jQuery</span>
+            <span class="timeline-tag">Bootstrap</span>
+            <span class="timeline-tag">PHP</span>
+            <span class="timeline-tag">MySQL</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <span class="timeline-company">AlumnoLibre</span>
+            <span class="timeline-date">2018 — 2022</span>
+          </div>
+          <div class="timeline-role">Freelance Software Developer</div>
+          <div class="timeline-desc">
+            Desarrollo freelance de un sistema educativo online, construyendo una plataforma 
+            escalable para la gestión de aprendizaje. Integración con servicios cloud de Azure 
+            para almacenamiento de archivos.
+          </div>
+          <div class="timeline-tags">
+            <span class="timeline-tag">C#</span>
+            <span class="timeline-tag">MVC</span>
+            <span class="timeline-tag">SqlServer</span>
+            <span class="timeline-tag">jQuery</span>
+            <span class="timeline-tag">Bootstrap</span>
+            <span class="timeline-tag">Kendo</span>
+            <span class="timeline-tag">Azure Blob Storage</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <span class="timeline-company">Llacruz</span>
+            <span class="timeline-date">2013</span>
+          </div>
+          <div class="timeline-role">Systems Analyst</div>
+          <div class="timeline-desc">
+            Analista de sistemas responsable de la modernización del sistema core de cobranzas 
+            y la optimización de bases de datos, mejorando el rendimiento y la mantenibilidad 
+            de la plataforma.
+          </div>
+          <div class="timeline-tags">
+            <span class="timeline-tag">C#</span>
+            <span class="timeline-tag">MVC</span>
+            <span class="timeline-tag">ASP</span>
+            <span class="timeline-tag">SqlServer</span>
+            <span class="timeline-tag">jQuery</span>
+            <span class="timeline-tag">Bootstrap</span>
+            <span class="timeline-tag">CVS</span>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <span class="timeline-company">Instituto Rehabilitación Infantil Teletón</span>
+            <span class="timeline-date">2009 — 2019</span>
+          </div>
+          <div class="timeline-role">Systems Analyst &amp; Development Lead</div>
+          <div class="timeline-desc">
+            Analista de sistemas y líder de desarrollo a cargo de la gestión de múltiples 
+            sistemas institucionales, soporte técnico e infraestructura tecnológica del 
+            instituto de rehabilitación infantil.
+          </div>
+          <div class="timeline-tags">
+            <span class="timeline-tag">C#</span>
+            <span class="timeline-tag">MVC</span>
+            <span class="timeline-tag">SqlServer</span>
+            <span class="timeline-tag">ASP</span>
+            <span class="timeline-tag">jQuery</span>
+            <span class="timeline-tag">Bootstrap</span>
+            <span class="timeline-tag">Redes</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Skills ===== -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-label reveal">Competencias</div>
+      <h2 class="section-title reveal">Habilidades Técnicas</h2>
+      <div class="skills-grid">
+
+        <div class="skill-category reveal">
+          <div class="skill-category-title">● Backend</div>
+          <div class="skill-items">
+            <span class="skill-item"><span class="dot mastery-high"></span>C# / .NET</span>
+            <span class="skill-item"><span class="dot mastery-high"></span>ASP.NET MVC</span>
+            <span class="skill-item"><span class="dot mastery-high"></span>Entity Framework</span>
+            <span class="skill-item"><span class="dot mastery-high"></span>Dapper</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>Python</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>Django</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>PHP</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>Node.js</span>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+          <div class="skill-category-title">● Frontend</div>
+          <div class="skill-items">
+            <span class="skill-item"><span class="dot mastery-high"></span>JavaScript</span>
+            <span class="skill-item"><span class="dot mastery-high"></span>jQuery</span>
+            <span class="skill-item"><span class="dot mastery-high"></span>Bootstrap</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>React</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>Next.js</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>HTML5</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>CSS3</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>Kendo UI</span>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+          <div class="skill-category-title">● Bases de Datos</div>
+          <div class="skill-items">
+            <span class="skill-item"><span class="dot mastery-high"></span>SQL Server</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>MySQL</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>SQL</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>ETL</span>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+          <div class="skill-category-title">● Cloud &amp; Herramientas</div>
+          <div class="skill-items">
+            <span class="skill-item"><span class="dot mastery-mid"></span>Azure</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>Blob Storage</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>Git</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>WebForm</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>CVS</span>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+          <div class="skill-category-title">● Metodologías</div>
+          <div class="skill-items">
+            <span class="skill-item">Clean Code</span>
+            <span class="skill-item">SOLID Principles</span>
+            <span class="skill-item">Trabajo en Equipo</span>
+            <span class="skill-item">Resolución de Problemas</span>
+            <span class="skill-item">Adaptabilidad</span>
+            <span class="skill-item">Mejora Continua</span>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+          <div class="skill-category-title">● Idiomas</div>
+          <div class="skill-items">
+            <span class="skill-item"><span class="dot mastery-high"></span>Español (Nativo)</span>
+            <span class="skill-item"><span class="dot mastery-mid"></span>Inglés (Básico-Intermedio)</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Education ===== -->
+  <section id="education">
+    <div class="container">
+      <div class="section-label reveal">Formación</div>
+      <h2 class="section-title reveal">Educación &amp; Certificaciones</h2>
+      <div class="education-list">
+
+        <div class="education-item reveal">
+          <div class="education-degree">Ingeniería en Informática</div>
+          <div class="education-school">DuocUC</div>
+          <div class="education-detail">2009</div>
+        </div>
+
+        <div class="education-item reveal">
+          <div class="education-degree">Capacitación Destacada</div>
+          <div class="education-school">Cursos online · Plataformas diversas</div>
+          <div class="education-detail">
+            React · Next.js · Python Backend · Clean Code · Principios SOLID · 
+            Cloud Computing · Machine Learning
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== References ===== -->
+  <section id="references">
+    <div class="container">
+      <div class="section-label reveal">Referencias</div>
+      <h2 class="section-title reveal">Contacto Profesional</h2>
+      <div class="references-grid">
+
+        <div class="reference-card reveal">
+          <div class="reference-name">Damaris Avila</div>
+          <div class="reference-role">Engineering Manager</div>
+          <div class="reference-org">SimpliRoute</div>
+        </div>
+
+        <div class="reference-card reveal">
+          <div class="reference-name">Diana Alvarez</div>
+          <div class="reference-role">Directora de Procesos Académicos</div>
+          <div class="reference-org">Universidad Adolfo Ibáñez</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="container">
+      <p>
+        © 2025 Ignacio Toro Carvajal · 
+        <a href="mailto:ignacio.toro.carvajal@gmail.com">Contacto</a> · 
+        <a href="https://www.linkedin.com/in/ignacio-toro-carvajal/" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <script>
+    // ── Ambient Particle Background ──
+    (function() {
+      const canvas = document.getElementById('bg-canvas');
+      const ctx = canvas.getContext('2d');
+      let w, h, particles = [];
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const COUNT = 60;
+      for (let i = 0; i < COUNT; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          r: Math.random() * 2 + 0.5,
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        for (let p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(108, 92, 231, 0.25)';
+          ctx.fill();
+        }
+
+        // Draw connections
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 140) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(108, 92, 231, ${0.08 * (1 - dist / 140)})`;
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ── Scroll Reveal ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
