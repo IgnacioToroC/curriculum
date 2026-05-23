@@ -39,16 +39,16 @@ export default function ExportPdfButton() {
       const opt = {
         margin:       0,
         filename:     "Ignacio-Toro-Carvajal-CV.pdf",
-        image:        { type: "jpeg", quality: 0.98 },
+        image:        { type: "jpeg" as const, quality: 0.98 },
         html2canvas:  { 
           scale: 2, 
           useCORS: true,
-          backgroundColor: "#ffffff",
+          backgroundColor: "#ffffff" as const,
           logging: true,
           windowWidth: 1200,
         },
-        jsPDF:        { unit: "mm", format: "a4", orientation: "portrait" },
-        pagebreak:    { mode: "css", avoidOrphans: true },
+        jsPDF:        { unit: "mm" as const, format: "a4" as const, orientation: "portrait" as const },
+        pagebreak:    { mode: "css" as const, avoidOrphans: true },
       };
 
       await html2pdf().set(opt).from(element).save();
