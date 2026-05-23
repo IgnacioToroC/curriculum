@@ -1,0 +1,323 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #12121a;
+  --color-bg-card: #1a1a28;
+  --color-bg-card-hover: #22223a;
+  --color-text-primary: #e8e8f0;
+  --color-text-secondary: #9898b0;
+  --color-text-muted: #6a6a82;
+  --color-accent: #6c5ce7;
+  --color-accent-light: #8b7df0;
+  --color-accent-glow: rgba(108, 92, 231, 0.25);
+  --color-green: #00d68f;
+  --color-orange: #ff9f43;
+  --color-border: #2a2a3e;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 3px;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Timeline dot for current position */
+.timeline-dot-current {
+  box-shadow: 0 0 0 2px var(--color-green), 0 0 20px rgba(0, 214, 143, 0.3);
+}
+
+/* Skill dot colors */
+.skill-dot-high {
+  background: var(--color-green);
+}
+.skill-dot-mid {
+  background: var(--color-orange);
+}
+
+/* Spinner animation for PDF button */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ─── Harvard-Style CV for PDF Export ─── */
+/* Rendered at the bottom of the page in normal flow.
+   html2canvas captures #cv-harvard-pdf directly (no cloning tricks). */
+.cv-harvard {
+  width: 210mm;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 18mm 20mm;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: "Garamond", "Times New Roman", Georgia, serif;
+  font-size: 11pt;
+  line-height: 1.45;
+  box-sizing: border-box;
+}
+
+.cv-harvard * {
+  box-sizing: border-box;
+}
+
+/* Header */
+.cv-harvard .cv-header {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.cv-harvard .cv-greeting {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 11pt;
+  font-weight: 400;
+  color: #444;
+  margin: 0 0 2px 0;
+  letter-spacing: 0.5px;
+}
+
+.cv-harvard .cv-name {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 22pt;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 4px 0;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.cv-harvard .cv-contact {
+  font-size: 9.5pt;
+  color: #333;
+  margin: 0 0 6px 0;
+  font-family: "Times New Roman", Georgia, serif;
+}
+
+.cv-harvard .cv-divider {
+  height: 1px;
+  background: #000;
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* Sections */
+.cv-harvard .cv-section {
+  margin-bottom: 10px;
+  page-break-inside: avoid;
+}
+
+/* Avoid cutting content across pages */
+.cv-harvard .cv-experience-item {
+  page-break-inside: avoid;
+}
+
+.cv-harvard .cv-edu-item {
+  page-break-inside: avoid;
+}
+
+.cv-harvard .cv-skill-group {
+  page-break-inside: avoid;
+}
+
+.cv-harvard .cv-bullets li {
+  page-break-inside: avoid;
+}
+
+.cv-harvard .cv-section-title {
+  page-break-after: avoid;
+}
+
+.cv-harvard .cv-section-title {
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 10.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #000;
+  margin: 10px 0 0 0;
+  padding: 0;
+  page-break-after: avoid;
+}
+
+.cv-harvard .cv-section-divider {
+  height: 1px;
+  background: #000;
+  width: 100%;
+  margin: 5px 0 5px 0;
+}
+
+.cv-harvard .cv-text {
+  font-size: 10.5pt;
+  color: #1a1a1a;
+  margin: 0 0 4px 0;
+  text-align: justify;
+  white-space: pre-line;
+}
+
+/* Experience */
+.cv-harvard .cv-experience-item {
+  margin-bottom: 8px;
+}
+
+.cv-harvard .cv-experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.cv-harvard .cv-company {
+  font-weight: 700;
+  font-size: 10.5pt;
+  color: #000;
+}
+
+.cv-harvard .cv-location {
+  font-size: 9.5pt;
+  color: #333;
+  font-style: italic;
+}
+
+.cv-harvard .cv-period {
+  font-size: 9.5pt;
+  color: #444;
+  font-family: "Times New Roman", Georgia, serif;
+  margin-left: auto;
+}
+
+.cv-harvard .cv-role {
+  font-weight: 600;
+  font-size: 10pt;
+  font-style: italic;
+  color: #222;
+  margin-bottom: 2px;
+}
+
+.cv-harvard .cv-bullets {
+  margin: 0;
+  padding-left: 16px;
+  list-style-type: disc;
+}
+
+.cv-harvard .cv-bullets li {
+  font-size: 10pt;
+  color: #1a1a1a;
+  margin-bottom: 1px;
+  text-align: justify;
+}
+
+/* Education */
+.cv-harvard .cv-edu-item {
+  font-size: 10pt;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+  line-height: 1.5;
+}
+
+.cv-harvard .cv-edu-degree {
+  font-weight: 700;
+}
+
+.cv-harvard .cv-edu-school {
+  font-style: italic;
+}
+
+.cv-harvard .cv-edu-detail {
+  color: #444;
+}
+
+/* Skills */
+.cv-harvard .cv-skill-group {
+  font-size: 10pt;
+  color: #1a1a1a;
+  margin-bottom: 1px;
+  line-height: 1.55;
+}
+
+.cv-harvard .cv-skill-category {
+  font-weight: 700;
+}
+
+.cv-harvard .cv-skill-items {
+  color: #333;
+}
+
+/* References */
+.cv-harvard .cv-ref-item {
+  font-size: 10pt;
+  color: #1a1a1a;
+  margin-bottom: 3px;
+  line-height: 1.5;
+  page-break-inside: avoid;
+}
+
+.cv-harvard .cv-ref-name {
+  font-weight: 700;
+}
+
+.cv-harvard .cv-ref-detail {
+  color: #333;
+}
+
+/* Print fallback: show Harvard PDF content */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  #bg-canvas,
+  #cv-content,
+  .fixed {
+    display: none !important;
+  }
+
+  #cv-harvard-pdf {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    width: auto !important;
+    padding: 18mm 20mm !important;
+    display: block !important;
+    pointer-events: auto !important;
+  }
+}
