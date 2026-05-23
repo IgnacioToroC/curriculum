@@ -1,0 +1,2 @@
+# Node\nnode_modules/\nnpm-debug.log*\n\n# OS\n.DS_Store\nThumbs.db\n\n# IDE\n.vscode/\n.idea/\n*.swp\n*.swo\n\n# Env\n.env\n.env.local\n\n# PDF original (ya tenemos la web)\n*.pdf
+dist/
