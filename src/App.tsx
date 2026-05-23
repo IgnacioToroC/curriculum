@@ -21,8 +21,10 @@ export default function App() {
         <References />
         <Footer />
       </div>
-      {/* Rendered at the bottom in normal flow — html2canvas captures it directly */}
-      <CvHarvardPdf />
+      {/* Off-screen but fully rendered — html2canvas captures it with proper dimensions */}
+      <div className="cv-pdf-container">
+        <CvHarvardPdf />
+      </div>
     </>
   );
 }

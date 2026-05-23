@@ -81,8 +81,14 @@ body {
 }
 
 /* ─── Harvard-Style CV for PDF Export ─── */
-/* Rendered at the bottom of the page in normal flow.
-   html2canvas captures #cv-harvard-pdf directly (no cloning tricks). */
+/* Visually hidden off-screen but still in DOM for html2canvas capture.
+   No overflow:hidden or height:0 — dimensions must be preserved. */
+.cv-pdf-container {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 210mm;
+}
 .cv-harvard {
   width: 210mm;
   max-width: 100%;
