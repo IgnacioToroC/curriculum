@@ -1,2 +1,24 @@
-# Node\nnode_modules/\nnpm-debug.log*\n\n# OS\n.DS_Store\nThumbs.db\n\n# IDE\n.vscode/\n.idea/\n*.swp\n*.swo\n\n# Env\n.env\n.env.local\n\n# PDF original (ya tenemos la web)\n*.pdf
+# Vite
+.vite/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Env
+.env
+.env.local
+
+# PDF original (ya tenemos la web)
+*.pdf
 dist/
