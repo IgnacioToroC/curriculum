@@ -10,8 +10,8 @@ const profile = {
     `Ingeniero Desarrollador | Transformando ideas en soluciones reales.\n\n` +
     `A lo largo de mi carrera, he descubierto que el desarrollo de software es mucho más que programar: ` +
     `es escuchar, analizar y transformar necesidades en herramientas robustas. ` +
-    `Me apasiona participar en el ciclo completo de un proyecto —desde esa primera conversación ` +
-    `de requerimientos hasta la satisfacción de la implementación—, asegurándome de que el ` +
+    `Me apasiona participar en el ciclo completo de un proyecto desde esa primera conversación ` +
+    `de requerimientos hasta la satisfacción de la implementación, asegurándome de que el ` +
     `resultado final sea impecable.\n\n` +
     `He dejado mi huella en los sectores de salud, educación y finanzas, entornos dinámicos ` +
     `que me han enseñado el valor de la adaptabilidad y la resiliencia. ` +
@@ -93,7 +93,7 @@ const educationList = [
   {
     degree: "Titulado Ingeniero en Informática",
     school: "Instituto Profesional DuocUC",
-    detail: "2009 · Santiago, Chile",
+    detail: "Marzo 2009 · Santiago, Chile",
   },
   {
     degree: "Práctica Profesional",
@@ -105,10 +105,29 @@ const educationList = [
     school: "Colegio Nuestra Señora María Inmaculada",
     detail: "2007 · Santiago, Chile",
   },
+];
+
+const courses = [
   {
-    degree: "Capacitación Destacada",
-    school: "Cursos online · Plataformas diversas",
-    detail: "React · Next.js · Python Backend · Clean Code · Principios SOLID · Cloud Computing · Machine Learning",
+    platform: "Udemy",
+    items: ["React: De cero a Experto (Hooks y MERN)"],
+  },
+  {
+    platform: "Platzi",
+    items: [
+      "Next.js",
+      "Backend con Python",
+      "Buenas Prácticas, Código Limpio y Principios SOLID en C#",
+      "Introducción a la Nube",
+      "Curso Inglés para Programadores",
+    ],
+  },
+  {
+    platform: "Universidad Adolfo Ibáñez",
+    items: [
+      "Fundamentos de Metodologías Ágil (Scrum)",
+      "Introducción al Machine Learning",
+    ],
   },
 ];
 
@@ -117,11 +136,13 @@ const referencesList = [
     name: "Damaris Avila",
     role: "Engineering Manager",
     org: "SimpliRoute",
+    phone: "+56 987354865",
   },
   {
     name: "Diana Alvarez",
     role: "Directora de Procesos Académicos",
     org: "Universidad Adolfo Ibáñez",
+    phone: "+56 979589264",
   },
 ];
 
@@ -182,10 +203,7 @@ export default function CvHarvardPdf() {
       {/* ── Header ── */}
       <div className="cv-header">
         <h1 className="cv-name">{profile.name}</h1>
-        <p className="cv-contact">
-          {profile.phone} &nbsp;|&nbsp; {profile.email} &nbsp;|&nbsp;{" "}
-          {profile.linkedin}
-        </p>
+        <p className="cv-subtitle">Ingeniero Desarrollador</p>
         <div className="cv-divider" />
       </div>
 
@@ -230,6 +248,18 @@ export default function CvHarvardPdf() {
         ))}
       </div>
 
+      {/* ── Capacitaciones ── */}
+      <div className="cv-section">
+        <h2 className="cv-section-title">Capacitaciones</h2>
+        <div className="cv-section-divider" />
+        {courses.map((group, i) => (
+          <div key={i} className="cv-course-group">
+            <span className="cv-course-platform">{group.platform}:</span>{" "}
+            <span className="cv-course-items">{group.items.join(" · ")}</span>
+          </div>
+        ))}
+      </div>
+
       {/* ── Skills ── */}
       <div className="cv-section">
         <h2 className="cv-section-title">Habilidades Técnicas</h2>
@@ -248,7 +278,7 @@ export default function CvHarvardPdf() {
         <div className="cv-section-divider" />
         <p className="cv-text">
           <strong>Español:</strong> Nativo &nbsp;|&nbsp;{" "}
-          <strong>Inglés:</strong> Básico-Intermedio
+          <strong>Inglés:</strong> Nivel B1 · Lectura técnica fluida, conversación básica
         </p>
       </div>
 
@@ -261,6 +291,9 @@ export default function CvHarvardPdf() {
             <span className="cv-ref-name">{ref.name}</span>
             <span className="cv-ref-detail">
               {" "}— {ref.role}, {ref.org}
+            </span>
+            <span className="cv-ref-phone">
+              {" "}| {ref.phone}
             </span>
           </div>
         ))}

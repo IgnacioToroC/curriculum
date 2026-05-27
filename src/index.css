@@ -126,16 +126,19 @@ body {
   font-size: 22pt;
   font-weight: 700;
   color: #000;
-  margin: 0 0 4px 0;
+  margin: 0 0 2px 0;
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
-.cv-harvard .cv-contact {
-  font-size: 9.5pt;
-  color: #333;
-  margin: 0 0 6px 0;
+.cv-harvard .cv-subtitle {
   font-family: "Times New Roman", Georgia, serif;
+  font-size: 10.5pt;
+  font-weight: 400;
+  color: #555;
+  margin: 0 0 6px 0;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 .cv-harvard .cv-divider {
@@ -287,6 +290,24 @@ body {
   color: #333;
 }
 
+/* Capacitaciones */
+.cv-harvard .cv-course-group {
+  font-size: 10pt;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+  line-height: 1.55;
+  page-break-inside: avoid;
+}
+
+.cv-harvard .cv-course-platform {
+  font-weight: 700;
+  color: #000;
+}
+
+.cv-harvard .cv-course-items {
+  color: #333;
+}
+
 /* References */
 .cv-harvard .cv-ref-item {
   font-size: 10pt;
@@ -302,6 +323,12 @@ body {
 
 .cv-harvard .cv-ref-detail {
   color: #333;
+}
+
+.cv-harvard .cv-ref-phone {
+  color: #6c5ce7;
+  font-weight: 600;
+  font-size: 9.5pt;
 }
 
 /* Print fallback: show Harvard PDF content */

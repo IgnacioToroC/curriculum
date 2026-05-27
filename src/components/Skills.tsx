@@ -85,7 +85,7 @@ const skillCategories: SkillCategory[] = [
     title: "● Idiomas",
     skills: [
       { name: "Español (Nativo)", mastery: "high" },
-      { name: "Inglés (Básico-Intermedio)", mastery: "mid" },
+      { name: "Inglés · Nivel B1 (lectura técnica fluida, conversación básica)", mastery: "mid" },
     ],
   },
 ];

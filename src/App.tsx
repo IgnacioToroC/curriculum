@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
 import Education from "./components/Education";
+import Capacitaciones from "./components/Capacitaciones";
 import References from "./components/References";
 import Footer from "./components/Footer";
 import ExportPdfButton from "./components/ExportPdfButton";
@@ -18,6 +19,7 @@ export default function App() {
         <Experience />
         <Skills />
         <Education />
+        <Capacitaciones />
         <References />
         <Footer />
       </div>

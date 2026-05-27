@@ -61,8 +61,8 @@ export default function Hero() {
           <p>
             A lo largo de mi carrera, he descubierto que el desarrollo de software es mucho más
             que programar: es escuchar, analizar y transformar necesidades en herramientas
-            robustas. Me apasiona participar en el ciclo completo de un proyecto —desde esa
-            primera conversación de requerimientos hasta la satisfacción de la implementación—,
+            robustas. Me apasiona participar en el ciclo completo de un proyecto desde esa
+            primera conversación de requerimientos hasta la satisfacción de la implementación,
             asegurándome de que el resultado final sea impecable.
           </p>
           <p>

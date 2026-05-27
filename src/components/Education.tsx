@@ -10,7 +10,7 @@ const educationList: Education[] = [
   {
     degree: "Título Ingeniero en Informática",
     school: "Instituto Profesional DuocUC",
-    detail: "2009 · Santiago, Chile",
+    detail: "Marzo 2009 · Santiago, Chile",
   },
   {
     degree: "Práctica Profesional",
@@ -21,12 +21,6 @@ const educationList: Education[] = [
     degree: "Práctica Laboral",
     school: "Colegio Nuestra Señora María Inmaculada",
     detail: "2007 · Santiago, Chile",
-  },
-  {
-    degree: "Capacitación Destacada",
-    school: "Cursos online · Plataformas diversas",
-    detail:
-      "React · Next.js · Python Backend · Clean Code · Principios SOLID · Cloud Computing · Machine Learning",
   },
 ];
 
@@ -56,7 +50,7 @@ export default function Education() {
           Formación
         </div>
         <h2 ref={titleRef} className="reveal text-[2rem] font-bold tracking-[-0.02em] mb-10 text-text-primary">
-          Educación &amp; Certificaciones
+          Educación
         </h2>
         <div className="grid gap-5">
           {educationList.map((item, i) => (
